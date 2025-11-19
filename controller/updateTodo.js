@@ -3,8 +3,8 @@ const Todo = require('../model/todoSchema');
 const updateStatus = async (req, res) => {
   try {
     const { id } = req.params;
-    const { todoName, todoStatus } = req.body;
-
+    const {todoName} = req.body; 
+    // find todo
     const todo = await Todo.findById(id);
     if (!todo) {
       return res.status(404).json({
@@ -12,17 +12,15 @@ const updateStatus = async (req, res) => {
       });
     }
 
+    // update status
     const updatedTodo = await Todo.findByIdAndUpdate(
       id,
-      { 
-        todoName: todoName,
-        todoStatus: todoStatus
-      },
-      { new: true }
+      {todoName:todoName},
+      { new: true } // return updated document
     );
 
     res.status(200).json({
-      message: "Todo updated successfully",
+      message: "Todo status updated",
       data: updatedTodo
     });
 
