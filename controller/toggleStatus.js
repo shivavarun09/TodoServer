@@ -3,9 +3,9 @@ const Todo = require('../model/todoSchema');
 const toggleStatus = async (req, res) => {
   try {
     const { id } = req.params;
-    const { toStatus } = req.body;  // frontend sends this
+    const { todoStatus } = req.body;  // frontend sends this
 
-    if (typeof toStatus !== "boolean") {
+    if (typeof todoStatus !== "boolean") {
       return res.status(400).json({
         message: "toStatus must be a boolean value"
       });
@@ -13,7 +13,7 @@ const toggleStatus = async (req, res) => {
 
     const updatedTodo = await Todo.findByIdAndUpdate(
       id,
-      { todoStatus: toStatus },
+      { todoStatus: todoStatus },
       { new: true }
     );
 
