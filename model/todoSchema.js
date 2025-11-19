@@ -6,11 +6,10 @@ const todoSchema = new mongoose.Schema({
     required: true
   },
   todoStatus: {
-    type: String,
-    enum: ["not completed", "completed"],
-    default:"not completed"
+    type: Boolean,
+    default: false  
   }
 });
 
 const Todo = mongoose.model("Todo", todoSchema);
-module.exports = Todo
+module.exports = Todo;
